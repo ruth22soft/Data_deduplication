@@ -1,0 +1,14 @@
+# Build the Docker image
+docker compose build
+
+# Run the full pipeline
+docker compose up
+
+# Run interactively (explore inside container)
+docker compose run --rm pipeline bash
+
+# Check what's inside /data once inside
+ls /data/enat_ledger/
+
+# View logs
+docker compose logs -f pipeline
