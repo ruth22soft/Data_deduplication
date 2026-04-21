@@ -1,14 +1,26 @@
 # Build the Docker image
 docker compose build
 
-# Run the full pipeline
+# Run the full pipeline (now includes duplicate analysis + output build)
 docker compose up
 
-# Run interactively (explore inside container)
+# Run the full pipeline once (module mode, same behavior)
+docker compose run --rm pipeline python -m pipeline.run_all
+
+# Run interactively (starts a shell inside the service container)
+# --rm means the one-off container is deleted when you exit
+# Use this to inspect files or run commands manually.
 docker compose run --rm pipeline bash
 
 # Check what's inside /data once inside
 ls /data/enat_ledger/
+
+# Run analysis only in a one-off container (no output parquet rebuild)
+docker compose run --rm pipeline python pipeline/analyze_duplicates.py
+
+# Optional duplicate removal is OFF by default.
+# To enable it later, uncomment the removal block in:
+# pipeline/dedupe.py
 
 # View logs
 docker compose logs -f pipeline

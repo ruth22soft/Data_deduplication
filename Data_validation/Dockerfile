@@ -14,4 +14,4 @@ COPY pipeline/ ./pipeline/
 # /data is mounted at runtime (not baked in)
 VOLUME ["/data"]
 
-CMD ["python", "pipeline/run_all.py"]
+CMD ["python", "-m", "pipeline.run_all"]
