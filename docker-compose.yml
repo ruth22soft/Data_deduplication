@@ -1,0 +1,12 @@
+services:
+  pipeline:
+    build:
+      context: .
+      dockerfile: Data_validation/Dockerfile
+    volumes:
+      # left side = your machine, right = inside container
+      - ./data/enat_ledger:/data/enat_ledger:ro
+      - ./output:/app/output
+    environment:
+      - LEDGER_PATH=/data/enat_ledger
+      - OUTPUT_PATH=/app/output
